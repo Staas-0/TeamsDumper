@@ -1,23 +1,14 @@
-[cmdletbinding()]
-Param([bool]$verbose)
-$VerbosePreference = if ($verbose) { 'Continue' } else { 'SilentlyContinue' }
+function Get-DisplayName {
+    [CmdletBinding()]
+    Param (
+        [string]$userId
+    )
 
-# used with eventDetail objects; member displayNames are sometimes null for no reason
+    # Check the global cache for the user
+    if ($Global:UserCache.ContainsKey($userId)) {
+        return $Global:UserCache[$userId].displayName
+    }
 
-function Get-DisplayName ($userId, $clientId, $tenantId) {
-    try {
-        $user = Get-User $userId $clientId $tenantId
-        
-        if ($null -ne $user.displayName) {
-            $user.displayName
-        }
-        else {
-            Write-Verbose "Fetched user's displayName is null."
-            "Unknown ($userId)"
-        }
-    }
-    catch {
-        Write-Verbose "Failed to fetch a user's displayName."
-        "Unknown ($userId)"
-    }
+    Write-Verbose "User with ID $userId not found in cache."
+    return "Unknown ($userId)"
 }

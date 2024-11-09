@@ -1,10 +1,7 @@
-[cmdletbinding()]
-Param([bool]$verbose)
-$VerbosePreference = if ($verbose) { 'Continue' } else { 'SilentlyContinue' }
-
 $fileAttachmentHTMLTemplate = Get-Content -Raw ./assets/fileAttachment.html
 
 function ConvertTo-HTMLAttachments ($attachments) {
+    [CmdletBinding()]
     $attachmentsHTML = ""
 
     # files
