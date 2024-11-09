@@ -19,7 +19,7 @@ function Get-Image ($imageTagMatch, $assetsFolderPath, $clientId, $tenantId) {
 
             Invoke-Retry -Code {
                 Invoke-WebRequest -Uri $imageUri -Headers @{
-                    "Authorization" = "Bearer $(Get-GraphAccessToken $clientId $tenantId)"
+                    "Authorization" = "Bearer $(Get-GraphAccessToken -clientId $clientId -clientSecret $clientSecret -tenantId $tenantId)"
                 } -OutFile $imageFilePath
             }
 

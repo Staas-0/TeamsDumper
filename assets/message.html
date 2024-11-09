@@ -2,7 +2,6 @@
     class="flex data-[me=true]:flex-row-reverse gap-2 group/message"
     data-deleted="###DELETED###"
     data-edited="###EDITED###"
-    data-me="###ME###"
     data-priority="###PRIORITY###"
 >
     <!-- group-data-[me=true]/message:hidden -->
@@ -35,6 +34,14 @@
             <div class="flex gap-2 flex-wrap empty:hidden group-data-[deleted=true]/message:hidden"
                 >###ATTACHMENTS###</div
             >
+        </div>
+        <!-- Reaction Section -->
+        <div class="flex flex-col gap-4 ml-8">
+            ###REACTION### <!-- Reactions will be appended here dynamically -->
+        </div>
+        <!-- Replies Section -->
+        <div class="flex flex-col gap-4 ml-8"> <!-- Add indentation or margin-left for replies -->
+            ###REPLY### <!-- Replies will be appended here dynamically -->
         </div>
     </div>
 </div>

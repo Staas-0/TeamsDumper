@@ -4,24 +4,28 @@ $VerbosePreference = if ($verbose) { 'Continue' } else { 'SilentlyContinue' }
 
 # used to get the initator of an event
 
-function Get-Initiator ($identitySet, $clientId, $tenantId) {
+function Get-Initiator ($identitySet) {
     if ($identitySet.user) {
-        if ($identitySet.user.displayName) {
-            $identitySet.user.displayName
+        $userId = $identitySet.user.id
+
+        # Check the cache for the display name
+        if ($Global:UserCache.ContainsKey($userId)) {
+            return $Global:UserCache[$userId].displayName
         }
         else {
-            Get-DisplayName $identitySet.user.id $clientId $tenantId
+            # If not found in cache, use Get-DisplayName
+            return Get-DisplayName $userId
         }
     }
     elseif ($identitySet.application) {
         if ($null -ne $identitySet.application.displayName) {
-            $identitySet.application.displayName
+            return $identitySet.application.displayName
         }
         else {
-            "An application"
+            return "An application"
         }
     }
     else {
-        "Unknown"
+        return "Unknown"
     }
 }
