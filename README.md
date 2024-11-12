@@ -23,6 +23,8 @@ The repository contains a PowerShell script that allows you to export your Micro
 
 1. Create a folder where you'll have your chat history exported to, otherwise it will be exported to \Exports from where the script is ran
 
+1. Run ```Set-ExecutionPolicy Bypass -Scope CurrentUser``` otherwise it throws a security warning for every module due to being unsigned.
+   
 1. Run the Powershell script
 
    ```PowerShell
